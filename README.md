@@ -1,2 +1,3 @@
-# Econometric-Modeling-of-GDP-Time-Series-Panel-Data-Analysis
-Time series and panel econometric analysis of GDP dynamics across six major economies (1979–2019). Applied ARIMA models, structural break detection, and Random Effects panel modeling to identify key drivers of GDP growth and generate forecasts with strong predictive accuracy (MAE ≈ 0.0046).
+Econometric Modeling of GDP Growth
+
+This project analyzes the GDP dynamics of six major economies — France, Germany, Italy, Japan, the United Kingdom, and the United States, using time series and panel econometric methods. The study covers quarterly data from 1979–2019 and investigates both domestic and international drivers of GDP growth.
