@@ -189,7 +189,7 @@ phtest(fixed2, random)
 # Final Model
 summary(random)
 
-# Forecast with train and test dataset
+# Forecast with train and test dataset #
 dataf$time <- as.numeric(as.character(dataf$time))
 train <- dataf %>% filter(time <= 128)
 test  <- dataf %>% filter(time > 128)
@@ -199,18 +199,34 @@ summary(random_train)
 
 test$pred <- predict(random_train, newdata = test)
 
-errors <- test$y - test$pred
+test$errors <- test$y - test$pred
 rmse_val <- sqrt(mean(errors^2))
 mae_val <- mean(abs(errors))
-
 
 perf_by_country <- test %>%
   group_by(country) %>%
   summarise(
-    RMSE = rmse_val,
-    MAE  = mae_val
+    RMSE = sqrt(mean(errors^2)),
+    MAE  = mean(abs(errors))
   )
 
+plot_df <- test %>%
+  as.data.frame() %>%
+  select(country, time, y, pred)
 
-
-
+ggplot(plot_df, aes(x = time)) +
+  geom_line(aes(y = y, color = "Actual"), size = 1) +
+  geom_line(aes(y = pred, color = "Predicted"), size = 1, linetype = "dashed") +
+  facet_wrap(~ country, scales = "free_y") +
+  labs(
+    title = "GDP Growth: Actual vs Predicted (Test Period)",
+    x = "Time (quarters)",
+    y = "GDP Growth",
+    color = ""
+  ) +
+  scale_color_manual(values = c("Actual" = "blue", "Predicted" = "red")) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold")
+  )
