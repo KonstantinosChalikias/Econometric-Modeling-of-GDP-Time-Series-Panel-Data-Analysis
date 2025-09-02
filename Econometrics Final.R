@@ -18,7 +18,7 @@ library(ggplot2)
 library(dplyr)
 
 # Set Working Directory
-setwd("C:/Users/xalik/desktop/Projects/AUEB/Econometrics")
+setwd("...")
 
 # Load Data
 data <- read_xlsx("data_econometrics_final.xlsx")
@@ -210,6 +210,7 @@ perf_by_country <- test %>%
     RMSE = rmse_val,
     MAE  = mae_val
   )
+
 
 
 
